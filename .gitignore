@@ -1,0 +1,6 @@
+/.idea/
+/.phpunit.cache/
+/build/
+/tests/coverage
+/vendor/
+.DS_Store
