@@ -14,7 +14,7 @@ class TableBodyRowTest extends TestCase
 
         $actual = new TableBodyRow(['value 1', 'value 2', 'value 3']);
 
-        $this->assertEquals($expected, (string) $actual);
+        $this->assertEquals($expected, $actual);
     }
 
     public function test_basic_table_body_row_with_cell_instances(): void
@@ -27,7 +27,7 @@ class TableBodyRowTest extends TestCase
             'value 3'
         ]);
 
-        $this->assertEquals($expected, (string) $actual);
+        $this->assertEquals($expected, $actual);
     }
 
     public function test_table_body_row_with_styles(): void
@@ -37,7 +37,7 @@ class TableBodyRowTest extends TestCase
         $actual = new TableBodyRow(['value 1', 'value 2', 'value 3'])
             ->styles(['background' => '#000', 'color' => 'white']);
 
-        $this->assertEquals($expected, (string) $actual);
+        $this->assertEquals($expected, $actual);
     }
 
     public function test_table_body_row_with_classes(): void
@@ -47,7 +47,7 @@ class TableBodyRowTest extends TestCase
         $actual = new TableBodyRow(['value 1', 'value 2', 'value 3'])
             ->styles(['background' => '#000', 'color' => 'white']);
 
-        $this->assertEquals($expected, (string) $actual);
+        $this->assertEquals($expected, $actual);
     }
 
     public function test_table_body_row_with_both_styles_and_classes(): void
@@ -61,6 +61,22 @@ class TableBodyRowTest extends TestCase
             ->styles(['background' => '#000', 'color' => 'white'])
             ->classes(['class1', 'class2', 'class3']);
 
-        $this->assertEquals(implode("\n", $expected), (string) $actual);
+        $this->assertEquals(implode("\n", $expected), $actual);
+    }
+
+    public function test_table_body_row_split_across_multiple_lines(): void
+    {
+        $expected = [
+            '|-',
+            '|value 1||value 2||value 3',
+            '|value 4||value 5'
+        ];
+
+        $actual = new TableBodyRow([
+            ['value 1', 'value 2', 'value 3'],
+            ['value 4', 'value 5'],
+        ]);
+
+        $this->assertEquals(implode("\n", $expected), $actual);
     }
 }

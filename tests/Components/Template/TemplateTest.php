@@ -15,21 +15,21 @@ class TemplateTest extends TestCase
 
     public function test_template_with_unnamed_parameters(): void
     {
-        $template = new Template('my template')
+        $actual = new Template('my template')
             ->params(['value1', 'value2']);
 
-        $this->assertEquals('{{my template|value1|value2}}', $template);
+        $this->assertEquals('{{my template|value1|value2}}', $actual);
     }
 
     public function test_template_with_named_parameters(): void
     {
-        $template = new Template('my template')
+        $actual = new Template('my template')
             ->params([
                 'arg1' => 'value1',
                 'arg2' => 'value2',
             ]);
 
-        $this->assertEquals('{{my template|arg1=value1|arg2=value2}}', $template);
+        $this->assertEquals('{{my template|arg1=value1|arg2=value2}}', $actual);
     }
 
     public function test_template_with_multiline_named_parameters(): void
@@ -42,7 +42,7 @@ class TemplateTest extends TestCase
             '}}',
         ];
 
-        $template = new Template('my template')
+        $actual = new Template('my template')
             ->multiline()
             ->params([
                 'arg1' => 'value1',
@@ -50,7 +50,7 @@ class TemplateTest extends TestCase
                 'arg3' => 'value3',
             ]);
 
-        $this->assertEquals(implode("\n", $expected), $template);
+        $this->assertEquals(implode("\n", $expected), $actual);
     }
 
     public function test_template_with_multiline_unnamed_parameters(): void
@@ -63,11 +63,11 @@ class TemplateTest extends TestCase
             '}}',
         ];
 
-        $template = new Template('my template')
+        $actual = new Template('my template')
             ->multiline()
             ->params(['arg1', 'arg2', 'arg3',]);
 
-        $this->assertEquals(implode("\n", $expected), $template);
+        $this->assertEquals(implode("\n", $expected), $actual);
     }
 
     public function test_template_with_spaced_multiline_named_parameters(): void
@@ -80,7 +80,7 @@ class TemplateTest extends TestCase
             '}}',
         ];
 
-        $template = new Template('my template')
+        $actual = new Template('my template')
             ->multiline()
             ->spaced()
             ->params([
@@ -89,7 +89,7 @@ class TemplateTest extends TestCase
                 'arg3' => 'value3',
             ]);
 
-        $this->assertEquals(implode("\n", $expected), $template);
+        $this->assertEquals(implode("\n", $expected), $actual);
     }
 
     public function test_template_with_spaced_parameters_must_be_multiline(): void
@@ -118,7 +118,7 @@ class TemplateTest extends TestCase
             '}}',
         ];
 
-        $template = new Template('my template')
+        $actual = new Template('my template')
             ->multiline()
             ->aligned()
             ->params([
@@ -127,7 +127,7 @@ class TemplateTest extends TestCase
                 'this is the third arg' => 'value3',
             ]);
 
-        $this->assertEquals(implode("\n", $expected), $template);
+        $this->assertEquals(implode("\n", $expected), $actual);
     }
 
     public function test_template_with_aligned_multiline_unnamed_parameters(): void
@@ -140,7 +140,7 @@ class TemplateTest extends TestCase
             '}}',
         ];
 
-        $template = new Template('my template')
+        $actual = new Template('my template')
             ->multiline()
             ->aligned()
             ->params([
@@ -149,7 +149,7 @@ class TemplateTest extends TestCase
                 'this is the third arg',
             ]);
 
-        $this->assertEquals(implode("\n", $expected), $template);
+        $this->assertEquals(implode("\n", $expected), $actual);
     }
 
     // Template with aligned and spaced multiline parameters does nothing
@@ -163,7 +163,7 @@ class TemplateTest extends TestCase
             '}}',
         ];
 
-        $template = new Template('my template')
+        $actual = new Template('my template')
             ->multiline()
             ->spaced()
             ->aligned()
@@ -173,7 +173,7 @@ class TemplateTest extends TestCase
                 'this is the third arg' => 'value3',
             ]);
 
-        $this->assertEquals(implode("\n", $expected), $template);
+        $this->assertEquals(implode("\n", $expected), $actual);
     }
 
     public function test_templates_with_multiline_named_parameters_can_have_named_parameters_on_one_line(): void
@@ -187,7 +187,7 @@ class TemplateTest extends TestCase
             '}}',
         ];
 
-        $template = new Template('my template')
+        $actual = new Template('my template')
             ->multiline()
             ->params([
                 'arg1' => 'value1',
@@ -196,7 +196,7 @@ class TemplateTest extends TestCase
                 'arg6' => 'value6',
             ]);
 
-        $this->assertEquals(implode("\n", $expected), $template);
+        $this->assertEquals(implode("\n", $expected), $actual);
     }
 
     public function test_templates_with_multiline_named_parameters_can_have_spaced_named_parameters_on_one_line(): void
@@ -210,7 +210,7 @@ class TemplateTest extends TestCase
             '}}',
         ];
 
-        $template = new Template('my template')
+        $actual = new Template('my template')
             ->multiline()
             ->spaced()
             ->params([
@@ -220,7 +220,7 @@ class TemplateTest extends TestCase
                 'arg6' => 'value6',
             ]);
 
-        $this->assertEquals(implode("\n", $expected), $template);
+        $this->assertEquals(implode("\n", $expected), $actual);
     }
 
     public function test_templates_with_multiline_unnamed_parameters_can_have_unnamed_parameters_on_one_line(): void
@@ -234,7 +234,7 @@ class TemplateTest extends TestCase
             '}}',
         ];
 
-        $template = new Template('my template')
+        $actual = new Template('my template')
             ->multiline()
             ->params([
                 'arg1',
@@ -243,6 +243,6 @@ class TemplateTest extends TestCase
                 'arg6',
             ]);
 
-        $this->assertEquals(implode("\n", $expected), $template);
+        $this->assertEquals(implode("\n", $expected), $actual);
     }
 }

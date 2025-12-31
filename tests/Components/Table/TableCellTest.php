@@ -11,7 +11,7 @@ class TableCellTest extends TestCase
     {
         $this->assertEquals(
             '|value',
-            (string) new TableCell('value')
+            new TableCell('value')
         );
     }
 
@@ -22,7 +22,7 @@ class TableCellTest extends TestCase
         $actual = new TableCell('value')
             ->styles(['text-align' => 'left', 'color' => 'green']);
 
-        $this->assertEquals($expected, (string) $actual);
+        $this->assertEquals($expected, $actual);
     }
 
     public function test_table_cell_with_classes(): void
@@ -32,7 +32,7 @@ class TableCellTest extends TestCase
         $actual = new TableCell('value')
             ->classes(['class1', 'class2', 'class3']);
 
-        $this->assertEquals($expected, (string) $actual);
+        $this->assertEquals($expected, $actual);
     }
 
     public function test_table_cell_with_both_styles_and_classes(): void
@@ -43,14 +43,14 @@ class TableCellTest extends TestCase
             ->styles(['text-align' => 'left', 'color' => 'green'])
             ->classes(['class1', 'class2', 'class3']);
 
-        $this->assertEquals($expected, (string) $actual);
+        $this->assertEquals($expected, $actual);
     }
 
     public function test_table_cell_with_rowspan(): void
     {
         $this->assertEquals(
             '|rowspan=2|value',
-            (string) new TableCell('value')->rowspan(2)
+            new TableCell('value')->rowspan(2)
         );
     }
 
@@ -58,7 +58,7 @@ class TableCellTest extends TestCase
     {
         $this->assertEquals(
             '|colspan=2|value',
-            (string) new TableCell('value')->colspan(2)
+            new TableCell('value')->colspan(2)
         );
     }
 
@@ -68,7 +68,7 @@ class TableCellTest extends TestCase
             ->colspan(2)
             ->rowspan(3);
 
-        $this->assertEquals('|colspan=2 rowspan=3|value', (string) $actual);
+        $this->assertEquals('|colspan=2 rowspan=3|value', $actual);
     }
 
     public function test_table_cell_with_styles_classes_rowspan_and_colspan(): void
@@ -81,6 +81,6 @@ class TableCellTest extends TestCase
             ->colspan(3)
             ->rowspan(2);
 
-        $this->assertEquals($expected, (string) $actual);
+        $this->assertEquals($expected, $actual);
     }
 }

@@ -12,7 +12,7 @@ class TableTest extends TestCase
 {
     public function test_basic_table(): void
     {
-        $wikitext = [
+        $expected = [
             '{| class="wikitable"',
             '|-',
             '!Header 1!!Header 2!!Header 3',
@@ -21,16 +21,16 @@ class TableTest extends TestCase
             '|}'
         ];
 
-        $table = new Table()
+        $actual = new Table()
             ->headerRow(['Header 1', 'Header 2', 'Header 3'])
             ->bodyRow(['Value 1', 'Value 2', 'Value 3']);
 
-        $this->assertEquals(implode("\n", $wikitext), (string)$table);
+        $this->assertEquals(implode("\n", $expected), $actual);
     }
 
     public function test_basic_table_can_supply_own_row_and_cell_instances(): void
     {
-        $wikitext = [
+        $expected = [
             '{| class="wikitable"',
             '|-',
             '!Header 1!!Header 2!!Header 3',
@@ -41,7 +41,7 @@ class TableTest extends TestCase
             '|}'
         ];
 
-        $table = new Table()
+        $actual = new Table()
             ->headerRow(new TableHeaderRow(['Header 1', 'Header 2', 'Header 3']))
             ->bodyRow(['Value 1', 'Value 2', 'Value 3'])
             ->bodyRow(new TableBodyRow([
@@ -50,12 +50,12 @@ class TableTest extends TestCase
                 'Value 6'
             ]));
 
-        $this->assertEquals(implode("\n", $wikitext), (string)$table);
+        $this->assertEquals(implode("\n", $expected), $actual);
     }
 
     public function test_basic_table_with_styles(): void
     {
-        $wikitext = [
+        $expected = [
             '{| class="wikitable" style="text-align:center;float:left"',
             '|-',
             '!Header 1!!Header 2!!Header 3',
@@ -64,17 +64,17 @@ class TableTest extends TestCase
             '|}'
         ];
 
-        $table = new Table()
+        $actual = new Table()
             ->styles(['text-align' => 'center', 'float' => 'left'])
             ->headerRow(['Header 1', 'Header 2', 'Header 3'])
             ->bodyRow(['Value 1', 'Value 2', 'Value 3']);
 
-        $this->assertEquals(implode("\n", $wikitext), (string)$table);
+        $this->assertEquals(implode("\n", $expected), $actual);
     }
 
     public function test_basic_table_with_classes(): void
     {
-        $wikitext = [
+        $expected = [
             '{| class="wikitable class1 class2"',
             '|-',
             '!Header 1!!Header 2!!Header 3',
@@ -83,17 +83,17 @@ class TableTest extends TestCase
             '|}'
         ];
 
-        $table = new Table()
+        $actual = new Table()
             ->classes(['class1', 'class2'])
             ->headerRow(['Header 1', 'Header 2', 'Header 3'])
             ->bodyRow(['Value 1', 'Value 2', 'Value 3']);
 
-        $this->assertEquals(implode("\n", $wikitext), (string)$table);
+        $this->assertEquals(implode("\n", $expected), $actual);
     }
 
     public function test_basic_table_with_both_styles_and_classes(): void
     {
-        $wikitext = [
+        $expected = [
             '{| class="wikitable class1 class2" style="text-align:center;float:left"',
             '|-',
             '!Header 1!!Header 2!!Header 3',
@@ -102,18 +102,18 @@ class TableTest extends TestCase
             '|}'
         ];
 
-        $table = new Table()
+        $actual = new Table()
             ->styles(['text-align' => 'center', 'float' => 'left'])
             ->classes(['class1', 'class2'])
             ->headerRow(['Header 1', 'Header 2', 'Header 3'])
             ->bodyRow(['Value 1', 'Value 2', 'Value 3']);
 
-        $this->assertEquals(implode("\n", $wikitext), (string)$table);
+        $this->assertEquals(implode("\n", $expected), $actual);
     }
 
     public function test_basic_table_with_caption(): void
     {
-        $wikitext = [
+        $expected = [
             '{| class="wikitable"',
             '|+ This is a caption',
             '|-',
@@ -123,13 +123,11 @@ class TableTest extends TestCase
             '|}'
         ];
 
-        $table = new Table()
+        $actual = new Table()
             ->caption('This is a caption')
             ->headerRow(['Header 1', 'Header 2', 'Header 3'])
             ->bodyRow(['Value 1', 'Value 2', 'Value 3']);
 
-        $this->assertEquals(implode("\n", $wikitext), (string)$table);
+        $this->assertEquals(implode("\n", $expected), $actual);
     }
-
-    // table_row_split_across_multiple_lines(): void
 }

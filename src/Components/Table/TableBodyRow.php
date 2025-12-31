@@ -25,16 +25,16 @@ class TableBodyRow extends TableRow
             $attributes[] = $this->renderClasses();
         }
 
-        if (! empty($this->styles)) {
+        if (!empty($this->styles)) {
             $attributes[] = $this->renderStyles();
         }
 
-        if (! empty($attributes)) {
+        if (!empty($attributes)) {
             $string .= ' ' . implode(' ', $attributes);
         }
 
         return $string
             . "\n"
-            . implode($this->separator, array_map(static fn(TableCell $value): string => $value->render(), $this->values));
+            . implode("\n", array_map(fn(array $line): string => implode($this->separator, array_map(fn(TableCell $cell): string => $cell->render(), $line)), $this->lines));
     }
 }

@@ -14,7 +14,7 @@ class TableHeaderRowTest extends TestCase
 
         $actual = new TableHeaderRow(['value 1', 'value 2', 'value 3']);
 
-        $this->assertEquals($expected, (string) $actual);
+        $this->assertEquals($expected, $actual);
     }
 
     public function test_basic_table_header_row_with_cell_instances(): void
@@ -27,7 +27,7 @@ class TableHeaderRowTest extends TestCase
             'value 3'
         ]);
 
-        $this->assertEquals($expected, (string) $actual);
+        $this->assertEquals($expected, $actual);
     }
 
     public function test_table_header_row_with_styles_applies_styles_to_each_cell(): void
@@ -37,6 +37,6 @@ class TableHeaderRowTest extends TestCase
         $actual = new TableHeaderRow(['value 1', 'value 2', 'value 3'])
             ->styles(['background' => '#000', 'color' => 'white']);
 
-        $this->assertEquals($expected, (string) $actual);
+        $this->assertEquals($expected, $actual);
     }
 }

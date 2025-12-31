@@ -15,9 +15,11 @@ class TableHeaderRow extends TableRow
 
         return $string
             . "\n"
-            . implode($this->separator, array_map(function (TableCell $value): string {
-                // Propagate the styles to the cell when in the header row context
-                return $value->styles($this->styles)->render();
-            }, $this->values));
+            . implode("\n", array_map(function (array $line): string {
+                return implode($this->separator, array_map(function (TableCell $cell): string {
+                    // Propagate the styles to the cell when in the header row context
+                    return $cell->styles($this->styles)->render();
+                }, $line));
+            }, $this->lines));
     }
 }
