@@ -20,9 +20,9 @@ class Builder
         return sprintf('%s%s%s', $repeater, $content, $repeater);
     }
 
-    public function template(string $name): Template
+    public function template(string $name, array $params = []): Template
     {
-        return new Template($name);
+        return new Template($name)->params($params);
     }
 
     public function table(Closure $closure): Table

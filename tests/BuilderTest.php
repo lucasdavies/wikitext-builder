@@ -49,6 +49,34 @@ class BuilderTest extends TestCase
         $this->assertEquals($expected, $template);
     }
 
+    public function test_build_template_with_params_as_second_arg(): void
+    {
+        $expected = '{{my template|param1|param2}}';
+
+        $template = $this->builder
+            ->template('my template', ['param1', 'param2']);
+
+        $this->assertEquals($expected, $template);
+    }
+
+    public function test_build_template_with_spaced_and_aligned_params(): void
+    {
+        $expected = [
+            '{{my template',
+            '|param1 = value1',
+            '|param2 = value2',
+            '}}',
+        ];
+
+        $template = $this->builder
+            ->template('my template')
+            ->multiline()
+            ->aligned()
+            ->params(['param1' => 'value1', 'param2' => 'value2']);
+
+        $this->assertEquals(implode("\n", $expected), $template);
+    }
+
     public function test_build_table(): void
     {
         $expected = [

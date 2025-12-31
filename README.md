@@ -1,4 +1,4 @@
-# WikitextBuilder
+# PHP Wikitext Builder
 
 A PHP library for building MediaWiki wikitext markup programmatically.
 
