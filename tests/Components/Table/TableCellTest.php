@@ -83,4 +83,56 @@ class TableCellTest extends TestCase
 
         $this->assertEquals($expected, $actual);
     }
+
+    public function test_table_cell_with_predefined_styles(): void
+    {
+        // Specifying predefined style first
+        $this->assertEquals(
+            '|style="text-align:center;color:green"|value',
+            new TableCell('value')->textCenter()->styles(['color' => 'green'])
+        );
+
+        // Specifying predefined style last
+        $this->assertEquals(
+            '|style="color:green;text-align:center"|value',
+            new TableCell('value')->styles(['color' => 'green'])->textCenter()
+        );
+
+        // Specifying predefined style first with same style in styles array
+        $this->assertEquals(
+            '|style="color:green;text-align:center"|value',
+            new TableCell('value')->textCenter()->styles(['color' => 'green', 'text-align' => 'center'])
+        );
+
+        // Specifying predefined style last with same style in styles array last
+        $this->assertEquals(
+            '|style="color:green;text-align:center"|value',
+            new TableCell('value')->styles(['color' => 'green', 'text-align' => 'center'])->textCenter()
+        );
+
+        // Specifying predefined style last with same style in styles array first
+        $this->assertEquals(
+            '|style="color:green;text-align:center"|value',
+            new TableCell('value')->styles(['text-align' => 'center', 'color' => 'green'])->textCenter()
+        );
+    }
+
+    public function test_table_cell_with_predefined_styles_are_overwritten(): void
+    {
+        $actual = new TableCell('value')
+            ->textCenter() // Specify predefined style first
+            ->styles(['color' => 'green', 'text-align' => 'left']); // Overwrite text-align style
+
+        $this->assertEquals('|style="color:green;text-align:left"|value', $actual);
+    }
+
+    public function test_table_cell_with_multiple_predefined_styles_are_overwritten(): void
+    {
+        $actual = new TableCell('value')
+            ->textCenter() // Specify predefined style first
+            ->styles(['color' => 'green', 'text-align' => 'left']) // Overwrite text-align style
+            ->textRight(); // Overwrite predefined style again with another predefined style
+
+        $this->assertEquals('|style="color:green;text-align:right"|value', $actual);
+    }
 }

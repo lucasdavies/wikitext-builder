@@ -26,7 +26,7 @@ $builder = new Builder();
 
 ### Headings
 
-Generate MediaWiki headings with the appropriate number of equals signs:
+Generate headings with the appropriate number of equals signs:
 
 ```php
 $builder->heading('Section Title', 2); // ==Section Title==
@@ -35,7 +35,7 @@ $builder->heading('Subsection', 3);    // ===Subsection===
 
 ### Templates
 
-Create MediaWiki templates with various formatting options:
+Create templates with various formatting options:
 
 ```php
 // Basic template
@@ -100,15 +100,12 @@ use LucasDavies\WikitextBuilder\Components\Template;
 
 $template = new Template('Citation needed');
 echo $template->render();
-```
-Outputs:
-```text
-{{Citation needed}}
+// {{Citation needed}}
 ```
 
 ### Tables
 
-Build MediaWiki tables with headers, body rows, captions, and styling:
+Build tables with headers, body rows, captions, and styling:
 
 ```php
 $builder->table(function (Table $table) {
