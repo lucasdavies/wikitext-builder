@@ -172,6 +172,46 @@ Outputs:
 |}
 ```
 
+### Styles
+
+When applying styles to components, predefined styles can be used:
+
+```php
+use LucasDavies\WikitextBuilder\Components\Table\TableCell;
+
+$cell = new TableCell('value')->textCenter();
+echo $cell->render();
+// |style="text-align:center"|value
+```
+
+Currently only text alignment styles are predefined: `textLeft()`, `textCenter()`, and `textRight()`.
+
+These can be used in conjunction with custom styles:
+
+```php
+use LucasDavies\WikitextBuilder\Components\Table\TableCell;
+
+$cell = new TableCell('value')->textCenter()->styles(['color' => 'red']);
+echo $cell->render();
+// |style="text-align:center;color:red"|value
+```
+
+Note that styles will overwrite each other depending on the order in which they are applied.
+
+```php
+use LucasDavies\WikitextBuilder\Components\Table\TableCell;
+
+// Custom style applied after predefined style
+$cell = new TableCell('value')->textCenter()->styles(['color' => 'red', 'text-align' => 'left']);
+echo $cell->render();
+// |style="color:red;text-align:left"|value
+
+// Predefined style applied after custom style
+$cell = new TableCell('value')->styles(['text-align' => 'left', 'color' => 'green'])->textRight();
+echo $cell->render();
+// |style="color:red;text-align:right"|value
+```
+
 ## Testing
 
 Run the test suite:

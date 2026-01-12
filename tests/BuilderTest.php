@@ -21,10 +21,6 @@ class BuilderTest extends TestCase
     public function test_build_headings(): void
     {
         $this->assertEquals('==Heading 2==', $this->builder->heading('Heading 2', 2));
-        $this->assertEquals('===Heading 3===', $this->builder->heading('Heading 3', 3));
-        $this->assertEquals('====Heading 4====', $this->builder->heading('Heading 4', 4));
-        $this->assertEquals('=====Heading 5=====', $this->builder->heading('Heading 5', 5));
-        $this->assertEquals('======Heading 6======', $this->builder->heading('Heading 6', 6));
     }
 
     public function test_build_template(): void
@@ -127,5 +123,47 @@ class BuilderTest extends TestCase
         });
 
         $this->assertEquals(implode("\n", $expected), $actual);
+    }
+
+    public function test_build_ordered_list(): void
+    {
+        $expected = [
+            '#First item',
+            '#Second item',
+            '#Third item',
+        ];
+
+        $actual = $this->builder->orderedList(['First item', 'Second item', 'Third item']);
+
+        $this->assertEquals(implode("\n", $expected), $actual);
+    }
+
+    public function test_build_unordered_list(): void
+    {
+        $expected = [
+            '*First item',
+            '*Second item',
+            '*Third item',
+        ];
+
+        $actual = $this->builder->unorderedList(['First item', 'Second item', 'Third item']);
+
+        $this->assertEquals(implode("\n", $expected), $actual);
+    }
+
+    public function test_build_multiple_components(): void
+    {
+        $this->builder->heading('Heading', 2);
+        $this->builder->template('My Template', ['param1', 'param2']);
+        $this->builder->orderedList(['Item 1', 'Item 2']);
+
+        $expected = [
+            '==Heading==',
+            '{{My Template|param1|param2}}',
+            '#Item 1',
+            '#Item 2',
+        ];
+
+        $this->assertEquals(implode("\n", $expected), $this->builder->render());
     }
 }

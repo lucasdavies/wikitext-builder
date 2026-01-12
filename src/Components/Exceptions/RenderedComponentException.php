@@ -10,4 +10,9 @@ class RenderedComponentException extends WikitextBuilderException
     {
         return new static('Templates with spaced parameters must be multiline');
     }
+
+    public static function invalidComponentArgument(string $message): static
+    {
+        return new static($message);
+    }
 }

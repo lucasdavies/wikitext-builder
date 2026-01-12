@@ -36,7 +36,7 @@ class OrderedListTest extends TestCase
             'Item5',
         ]);
 
-        $this->assertEquals(implode("\n", $expected), (string) $actual);
+        $this->assertEquals(implode("\n", $expected), $actual);
     }
     public function test_spaced_ordered_list(): void
     {
@@ -67,6 +67,6 @@ class OrderedListTest extends TestCase
             'Item5',
         ])->spaced();
 
-        $this->assertEquals(implode("\n", $expected), (string) $actual);
+        $this->assertEquals(implode("\n", $expected), $actual);
     }
 }

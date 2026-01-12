@@ -2,10 +2,14 @@
 
 namespace LucasDavies\WikitextBuilder\Components;
 
+use LucasDavies\WikitextBuilder\Components\Exceptions\RenderedComponentException;
+
 abstract class Component
 {
     /**
      * How to render the wikitext component in string format.
+     *
+     * @throws RenderedComponentException
      */
     abstract public function render(): string;
 

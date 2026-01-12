@@ -9,10 +9,29 @@ class Template extends Component
 {
     private string $name;
 
+    /**
+     * Whether the template parameters should be rendered on multiple lines.
+     */
     private bool $multiline = false;
+
+    /**
+     * Whether to add spaces around the equal signs in parameters e.g. "param = value" instead of "value=param".
+     */
     private bool $spaced = false;
+
+    /**
+     * Whether to align the multiline parameters by padding the parameter names with spaces up until the "=" e.g.
+     * |param       = value1
+     * |longerParam = value2
+     * Instead of:
+     * |param = value1
+     * |longerParam = value2
+     */
     private bool $aligned = false;
 
+    /**
+     * The template parameters.
+     */
     private array $params = [];
 
     public function __construct(string $name)
