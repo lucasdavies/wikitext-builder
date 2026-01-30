@@ -7,7 +7,19 @@ use LucasDavies\WikitextBuilder\Components\Exceptions\RenderedComponentException
 
 class Template extends Component
 {
-    private string $name;
+    /**
+     * The template name.
+     */
+    private(set) string $name {
+        get => $this->name;
+    }
+
+    /**
+     * The template parameters.
+     */
+    private(set) array $params = [] {
+        get => $this->params;
+    }
 
     /**
      * Whether the template parameters should be rendered on multiple lines.
@@ -28,11 +40,6 @@ class Template extends Component
      * |longerParam = value2
      */
     private bool $aligned = false;
-
-    /**
-     * The template parameters.
-     */
-    private array $params = [];
 
     public function __construct(string $name)
     {

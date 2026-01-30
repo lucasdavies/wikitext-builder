@@ -166,4 +166,24 @@ class BuilderTest extends TestCase
 
         $this->assertEquals(implode("\n", $expected), $this->builder->render());
     }
+
+    public function test_build_multiple_nested_components(): void
+    {
+        $this->builder->heading('Heading', 2);
+
+        $items = [
+            $this->builder->template('My Template', ['param1', 'param2']),
+            $this->builder->template('My Template2', ['param1' => 'value1']),
+        ];
+
+        $this->builder->unorderedList($items);
+
+        $expected = [
+            '==Heading==',
+            '*{{My Template|param1|param2}}',
+            '*{{My Template2|param1=value1}}',
+        ];
+
+        $this->assertEquals(implode("\n", $expected), $this->builder->render());
+    }
 }
