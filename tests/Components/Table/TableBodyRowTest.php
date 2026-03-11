@@ -79,4 +79,22 @@ class TableBodyRowTest extends TestCase
 
         $this->assertEquals(implode("\n", $expected), $actual);
     }
+
+    public function test_table_body_row_split_across_multiple_lines_can_have_header_cells(): void
+    {
+        $expected = [
+            '|-',
+            '|value 1||value 2||value 3',
+            '|value 4||colspan=2|value 5',
+            '!value 6!!value 7!!value 8'
+        ];
+
+        $actual = new TableBodyRow([
+            ['value 1', 'value 2', 'value 3'],
+            ['value 4', new TableCell('value 5')->colspan(2)],
+            [new TableCell('value 6', '!'), new TableCell('value 7', '!'), new TableCell('value 8', '!')],
+        ]);
+
+        $this->assertEquals(implode("\n", $expected), $actual);
+    }
 }

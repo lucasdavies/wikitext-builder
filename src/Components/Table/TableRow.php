@@ -44,8 +44,11 @@ abstract class TableRow extends Component
     private function handleCellValue($value, $separator)
     {
         if ($value instanceof TableCell) {
-            // Update the cell separator depending on row context (body or header)
-            return $value->setSeparator($separator);
+            if ($value->hasExplicitSeparator) {
+                return $value;
+            }
+
+            return $value->withSeparator($separator);
         }
 
         return new TableCell($value, $separator);

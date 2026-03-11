@@ -11,24 +11,31 @@ class TableCell extends Component
     use HasStyles;
     use HasClasses;
 
-    private string $separator;
+    private(set) string $separator = '|';
+
+    private(set) bool $hasExplicitSeparator = false;
 
     private string $value;
 
     private ?int $colspan = null;
     private ?int $rowspan = null;
 
-    public function __construct(string $value, string $separator = '|')
+    public function __construct(string $value, ?string $separator = null)
     {
         $this->value = $value;
-        $this->separator = $separator;
+
+        if ($separator !== null) {
+            $this->separator = $separator;
+            $this->hasExplicitSeparator = true;
+        }
     }
 
-    public function setSeparator(string $separator): static
+    public function withSeparator(string $separator): static
     {
-        $this->separator = $separator;
+        $clone = clone $this;
+        $clone->separator = $separator;
 
-        return $this;
+        return $clone;
     }
 
     public function colspan(int $value): static

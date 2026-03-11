@@ -33,8 +33,8 @@ class TableBodyRow extends TableRow
             $string .= ' ' . implode(' ', $attributes);
         }
 
-        return $string
-            . "\n"
-            . implode("\n", array_map(fn(array $line): string => implode($this->separator, array_map(fn(TableCell $cell): string => $cell->render(), $line)), $this->lines));
+        return $string . "\n" . implode("\n", array_map(static function (array $line): string {
+                return implode($line[0]->separator, array_map(static fn(TableCell $cell): string => $cell->render(), $line));
+            }, $this->lines));
     }
 }
